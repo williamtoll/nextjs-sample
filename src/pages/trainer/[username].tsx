@@ -10,7 +10,7 @@ type Props = {
 const TrainerProfile: React.FC<Props> = ({ firstname, lastname }) => {
   return (
     <>
-      <Title>{firstname}</Title>
+      <Title>Firstname: {firstname}</Title>
       <Title>{lastname}</Title>
     </>
   );
