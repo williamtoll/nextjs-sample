@@ -11,7 +11,7 @@ const TrainerProfile: React.FC<Props> = ({ firstname, lastname }) => {
   return (
     <>
       <Title>Firstname: {firstname}</Title>
-      <Title>{lastname}</Title>
+      <Title>Lastname: {lastname}</Title>
     </>
   );
 };
