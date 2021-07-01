@@ -1,19 +1,21 @@
 import { AppProps } from 'next/app';
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import '../styles/elements/_fonts.scss';
 
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Mukta;
   }
-`
+`;
 
 const theme = {
   colors: {
-    primary: '#0070f3',
+    primary: '#4C33C3',
   },
-}
+};
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -23,5 +25,5 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </ThemeProvider>
     </>
-  )
+  );
 }
