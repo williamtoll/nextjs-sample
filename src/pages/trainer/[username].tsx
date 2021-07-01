@@ -2,10 +2,11 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import styled from 'styled-components';
 
-const TrainerProfile: React.FC = ({ firstname, ...rest }) => {
-  console.log('firstname', firstname);
-  console.log('rest', rest);
+type Props = {
+  firstname: string;
+}
 
+const TrainerProfile: React.FC<Props> = ({ firstname }) => {
   return (
     <>
       <Title>{firstname}</Title>
