@@ -4,15 +4,17 @@ import styled from 'styled-components';
 
 type Props = {
   firstname: string;
-}
+  lastname: string;
+};
 
-const TrainerProfile: React.FC<Props> = ({ firstname }) => {
+const TrainerProfile: React.FC<Props> = ({ firstname, lastname }) => {
   return (
     <>
       <Title>{firstname}</Title>
+      <Title>{lastname}</Title>
     </>
-  )
-}
+  );
+};
 
 const Title = styled.h1`
   color: blue;
@@ -27,14 +29,14 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   if (!data) {
     return {
       notFound: true,
-    }
+    };
   }
 
   return {
     props: {
       ...data.result,
     },
-  }
-}
+  };
+};
 
 export default TrainerProfile;
