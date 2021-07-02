@@ -1,13 +1,8 @@
 import React from 'react';
-
 import styled from 'styled-components';
 import { PricingValue } from './PriceValue';
 
-type Props = {
-  pricings: Object[];
-};
-
-const PricingSectionUi: React.FC<Props> = ({ pricings }) => {
+const PricingSectionUi: React.FC = () => {
   const cartData = [
     {
       id: 375,

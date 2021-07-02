@@ -152,37 +152,4 @@ const NumberPrice = styled.div`
   color: #4c33c3;
 `;
 
-const ButtonItem = styled.div`
-  max-width: 176px;
-  background-color: #4c33c3;
-  color: #ffffff;
-  border: none;
-  border-radius: 7px;
-  font-weight: bold;
-  font-size: 15px;
-  cursor: pointer;
-  box-shadow: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: hover 1s;
-  width: 26px;
-  height: 26px;
-  &:hover {
-    background-color: lighten(#4c33c3, 20);
-  }
-  @media screen and (min-width: 1200px) {
-    height: 40px;
-    width: 176px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .btn__item-text {
-      font-size: 1rem;
-      display: block;
-      margin-right: 4px;
-    }
-  }
-`;
-
 export const PricingValue = React.memo(PricingValueUi);

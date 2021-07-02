@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import styled from 'styled-components';
@@ -39,7 +40,6 @@ const TrainerProfile: React.FC<Props> = ({
   facebook,
   linkedIn,
   twitter,
-  certificates,
   trainerSince,
   joinDate,
   preferredTraineePersonality,
@@ -265,10 +265,6 @@ const Column = styled.div`
   flex: 1;
   flex-direction: column;
   padding-top: 39px;
-`;
-
-const Title = styled.h1`
-  color: blue;
 `;
 
 const TrainerDetailsWrap = styled.div`
