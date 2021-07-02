@@ -5,13 +5,230 @@ import { ProfileHeader } from './ProfileHeader';
 import TitledTrainerSection from './TitledTrainerSection';
 import { ImageType } from './types';
 import CenteredCss from './CenteredCss';
+import JoinedData from './components/JoinedData';
+import { SocialMediaItem } from './components/SocialMediaItem';
+import { PricingSection } from './components/PricingSection';
 
 type Props = {
-  firstname: string;
-  lastname: string;
+  name: string;
   bio: string;
   profileImage: ImageType;
   images: ImageType[];
+  pricings: Object;
+  instagram: string;
+  facebook: string;
+  linkedIn: string;
+  twitter: string;
+  certificates: Object;
+  trainerSince: string;
+  joinDate: string;
+  preferredTraineePersonality: string[];
+  preferredAgeGroup: string[];
+  instructionType: string[];
+  classType: string[];
+  personality: string[];
+};
+
+const TrainerProfile: React.FC<Props> = ({
+  name,
+  bio,
+  profileImage,
+  images,
+  pricings,
+  instagram,
+  facebook,
+  linkedIn,
+  twitter,
+  certificates,
+  trainerSince,
+  joinDate,
+  preferredTraineePersonality,
+  preferredAgeGroup,
+  instructionType,
+  classType,
+  personality,
+}) => {
+  return (
+    <>
+      <TrainerInfoWrapper>
+        <StyledHr />
+        <CenteredContent>
+          <ProfileHeader trainerName={name}></ProfileHeader>
+          <ColumnsWrapper>
+            <BigColumn>
+              <TrainerDetailsWrap>
+                <BasicInfoContainer>
+                  <BaseInfoWrapper>
+                    <ImageContainer>
+                      <img
+                        alt={name}
+                        src={profileImage ? profileImage.url : images[0].url}
+                      />
+                    </ImageContainer>
+                  </BaseInfoWrapper>
+                  <BioText>{bio}</BioText>
+                  <TitledTrainerSection label="Gender: " values={['Male']} />
+                  <JoinedData
+                    title="Fitness Training Experience"
+                    label="Joined Jijo:"
+                    trainerSinceValue={trainerSince}
+                    trainerExperience={trainerSince}
+                    joinedData={joinDate}
+                  />
+
+                  {/* <TitledTrainerSection
+                  title="Fitness Certifications"
+                >
+                  {certificates.map((c) => (
+                    <CertificateItemProf
+                      key={c.id}
+                      certificate={c}
+                      certificateNumber={getCertificateNumber(
+                        c.id,
+                        certificates,
+                      )}
+                    />
+                  ))}
+                </TitledTrainerSection> */}
+
+                  <TitledTrainerSection
+                    title="Preferred Client Attributes"
+                    values={preferredTraineePersonality}
+                  />
+                  <TitledTrainerSection
+                    title="Age Group Focus"
+                    values={preferredAgeGroup}
+                  />
+                  <TitledTrainerSection
+                    title="Instruction Type Offered"
+                    values={instructionType}
+                  />
+                  <TitledTrainerSection
+                    title="Class Types"
+                    values={classType}
+                  />
+                  <TitledTrainerSection
+                    title="Training Style"
+                    values={personality}
+                  />
+
+                  <TitledTrainerSection title="Social Media">
+                    <>
+                      {!!instagram && (
+                        <SocialMediaItem type="instagram" url={instagram} />
+                      )}
+                      {!!facebook && (
+                        <SocialMediaItem type="facebook" url={facebook} />
+                      )}
+                      {!!twitter && (
+                        <SocialMediaItem type="twitter" url={twitter} />
+                      )}
+                      {!!linkedIn && (
+                        <SocialMediaItem type="linkedIn" url={linkedIn} />
+                      )}
+                    </>
+                  </TitledTrainerSection>
+                </BasicInfoContainer>
+              </TrainerDetailsWrap>
+            </BigColumn>
+            <Column>
+              <PricingSection
+                pricings={pricings}
+              />
+            </Column>
+          </ColumnsWrapper>
+        </CenteredContent>
+      </TrainerInfoWrapper>
+    </>
+  );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const API_URL = 'https://dev-api.myjijo.com/api/v1';
+  const { username } = params;
+  const res = await fetch(`${API_URL}/trainer/${username}`);
+  let data = await res.json();
+
+  data = {
+    result: {
+      id: 212,
+      name: 'William Toledo',
+      trainerSince: 'Mar 19 2005',
+      joinDate: 'Apr 5 2021',
+      state: 'OH',
+      stateName: 'Ohio',
+      bio:
+        "For over 22 years I have acquired all the training and the tools needed to specialize in empowering active aging women and men (50+) to feel safe, healthy and strong. Are you ready to overcome your fitness and health challenges? It's totally possible! Work with me and you will increase your stamina, flexibility, mobility, stability, and strength. I will guide you to improve your confidence and commitment to living a more vibrant and",
+      facebook: 'https://www.facebook.com/fitness123',
+      status: 'Active',
+      genderId: 2,
+      profileImage: {
+        url:
+          'https://dev-myjijo-images.s3.amazonaws.com/212/b25ecccf-5af6-499c-a766-fbeca155a30c.jpg',
+      },
+      preferredAgeGroup: ['18+', '50+'],
+      personality: ['coachable', 'efficient', 'friendly'],
+      instructionType: ['Group', 'Private training'],
+      classType: ['Boxing', 'Cardio'],
+      preferredTraineePersonality: ['Efficient', 'Focused'],
+      certificates: [
+        {
+          certificateNumber: 'WORG | 22222',
+        },
+        {
+          certificateNumber: 'ACE124',
+        },
+      ],
+      pricings: [
+        {
+          name: 'perClass',
+          value: 100,
+          instructionTypeId: 'Private training pricing',
+        },
+        {
+          name: 'five pack',
+          value: 495,
+          instructionTypeId: 'Private training pricing',
+        },
+        {
+          name: 'ten pack',
+          value: 990,
+          instructionTypeId: 'Private training pricing',
+        },
+        {
+          name: 'perClass',
+          value: 50,
+          instructionTypeId: 'Group training pricing',
+        },
+        {
+          name: 'five pack',
+          value: 250,
+          instructionTypeId: 'Group training pricing',
+        },
+        {
+          name: 'ten pack',
+          value: 500,
+          instructionTypeId: 'Group training pricing',
+        },
+      ],
+    },
+    correlationId: 'd4405480-1cff-4345-a345-37f5fb7275b3',
+    succeeded: true,
+    message: 'Success.',
+    serverTime: '2021-07-02T13:23:17Z',
+  };
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      ...data.result,
+    },
+  };
 };
 
 const TrainerInfoWrapper = styled.div`
@@ -115,65 +332,5 @@ const BasicInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-const TrainerProfile: React.FC<Props> = ({
-  firstname,
-  lastname,
-  bio,
-  profileImage,
-  images,
-}) => {
-  return (
-    <>
-      <TrainerInfoWrapper>
-        <StyledHr />
-        <CenteredContent>
-          <ProfileHeader
-            trainerName={`${firstname !== undefined ? firstname : ''} ${
-              lastname !== undefined ? lastname : ''
-            }`}
-          ></ProfileHeader>
-          <ColumnsWrapper>
-            <BigColumn>
-              <TrainerDetailsWrap>
-                <BasicInfoContainer>
-                  <BaseInfoWrapper>
-                    <ImageContainer>
-                      <img
-                        alt={firstname}
-                        src={profileImage ? profileImage.url : images[0].url}
-                      />
-                    </ImageContainer>
-                  </BaseInfoWrapper>
-                  <BioText>{bio}</BioText>
-                  <TitledTrainerSection label="Gender: " values={['Male']} />
-                </BasicInfoContainer>
-              </TrainerDetailsWrap>
-            </BigColumn>
-          </ColumnsWrapper>
-        </CenteredContent>
-      </TrainerInfoWrapper>
-    </>
-  );
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const API_URL = 'https://dev-api.myjijo.com/api/v1';
-  const { username } = params;
-  const res = await fetch(`${API_URL}/trainer/${username}`);
-  const data = await res.json();
-
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: {
-      ...data.result,
-    },
-  };
-};
 
 export default TrainerProfile;

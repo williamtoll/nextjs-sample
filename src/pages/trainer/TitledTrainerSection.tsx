@@ -1,6 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
 
+type Props = {
+  title?: string;
+  label?: string;
+  values?: string[];
+  children?: React.ReactChild | React.ReactNodeArray;
+};
+
+const TitledTrainerSection: React.FC<Props> = ({
+  title,
+  label,
+  values,
+  children,
+}) => {
+  if (!values?.length && !children) return null;
+
+  return (
+    <Container>
+      {title && (
+        <TitleContainer>
+          <Title>{title}</Title>
+        </TitleContainer>
+      )}
+      <ValuesContainer>
+        {children || (
+          <>
+            {label && <LabelText>{label}</LabelText>}
+            {values?.map((value) => (
+              <ValueContainer key={`${label}-${value}`}>
+                <StyledBody>{value}</StyledBody>
+              </ValueContainer>
+            ))}
+          </>
+        )}
+      </ValuesContainer>
+    </Container>
+  );
+};
+
 const Container = styled.div`
   padding-bottom: 24px;
   border-bottom: 2px solid #f2f2f2;
@@ -42,43 +80,5 @@ const Title = styled.h3`
 const StyledBody = styled.h4`
   color: #4c33c3;
 `;
-
-type Props = {
-  title?: string;
-  label?: string;
-  values?: string[];
-  children?: React.ReactChild | React.ReactNodeArray;
-};
-
-const TitledTrainerSection: React.FC<Props> = ({
-  title,
-  label,
-  values,
-  children,
-}) => {
-  if (!values?.length && !children) return null;
-
-  return (
-    <Container>
-      {title && (
-        <TitleContainer>
-          <Title>{title}</Title>
-        </TitleContainer>
-      )}
-      <ValuesContainer>
-        {children || (
-          <>
-            {label && <LabelText>{label}</LabelText>}
-            {values?.map((value) => (
-              <ValueContainer key={`${label}-${value}`}>
-                <StyledBody>{value}</StyledBody>
-              </ValueContainer>
-            ))}
-          </>
-        )}
-      </ValuesContainer>
-    </Container>
-  );
-};
 
 export default React.memo(TitledTrainerSection);

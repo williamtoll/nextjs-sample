@@ -1,6 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import Styles from '../../styles/settings/_colors.scss';
+
+type Props = {
+  trainerName: string;
+  rightActionComponent?: React.ReactNode;
+  children?: React.ReactNode;
+};
+
+const ProfileHeaderUI: React.FC<Props> = ({ trainerName, children }) => (
+  <>
+    <HeaderWrapper>
+      <NameLabel noMargin>{trainerName}</NameLabel>
+      <div>{children}</div>
+    </HeaderWrapper>
+    <HorizontalLine />
+  </>
+);
 
 const HeaderWrapper = styled.div<{ isClientView?: boolean }>`
   width: 100%;
@@ -23,21 +38,5 @@ const NameLabel = styled.span`
   font-size: 42px;
   font-weight: bold;
 `;
-
-type Props = {
-  trainerName: string;
-  rightActionComponent?: React.ReactNode;
-  children?: React.ReactNode;
-};
-
-const ProfileHeaderUI: React.FC<Props> = ({ trainerName, children }) => (
-  <>
-    <HeaderWrapper>
-      <NameLabel noMargin>{trainerName}</NameLabel>
-      <div>{children}</div>
-    </HeaderWrapper>
-    <HorizontalLine />
-  </>
-);
 
 export const ProfileHeader = React.memo(ProfileHeaderUI);
