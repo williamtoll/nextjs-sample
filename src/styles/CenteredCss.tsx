@@ -12,11 +12,7 @@ export default css`
     padding-right: 24px;
   }
 
-  @media (min-width: 1920px){
+  @media (min-width: 1920px) {
     max-width: 1400px;
   }
-
-  
-
-
 `;

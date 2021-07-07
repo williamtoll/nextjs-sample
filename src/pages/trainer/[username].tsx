@@ -2,13 +2,19 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import styled from 'styled-components';
-import { ProfileHeader } from './ProfileHeader';
-import TitledTrainerSection from './TitledTrainerSection';
-import { ImageType } from './types';
-import CenteredCss from './CenteredCss';
+import { ProfileHeader } from './components/ProfileHeader';
+import TitledTrainerSection from './components/TitledTrainerSection';
+import { ImageType, TrainerCertificate } from './types';
+import CenteredCss from '../../styles/CenteredCss';
 import JoinedData from './components/JoinedData';
 import { SocialMediaItem } from './components/SocialMediaItem';
 import { PricingSection } from './components/PricingSection';
+import TrainerProfileMobile from './TrainerProfileMobile';
+import { GLOBAL_MEDIA_QUERIES } from '../../shared/constants';
+import Media from 'react-media';
+import { ClassDetailsBookBox } from './components/ClassDetailsBookBox';
+import { CertificateItemProf } from './components/ClientCertificateProf';
+import * as CertificateUtils from '../../utils/certificate';
 
 type Props = {
   name: string;
@@ -20,7 +26,7 @@ type Props = {
   facebook: string;
   linkedIn: string;
   twitter: string;
-  certificates: Object;
+  certificates: TrainerCertificate[];
   trainerSince: string;
   joinDate: string;
   preferredTraineePersonality: string[];
@@ -40,6 +46,7 @@ const TrainerProfile: React.FC<Props> = ({
   facebook,
   linkedIn,
   twitter,
+  certificates,
   trainerSince,
   joinDate,
   preferredTraineePersonality,
@@ -54,89 +61,117 @@ const TrainerProfile: React.FC<Props> = ({
         <StyledHr />
         <CenteredContent>
           <ProfileHeader trainerName={name}></ProfileHeader>
-          <ColumnsWrapper>
-            <BigColumn>
-              <TrainerDetailsWrap>
-                <BasicInfoContainer>
-                  <BaseInfoWrapper>
-                    <ImageContainer>
-                      <img
-                        alt={name}
-                        src={profileImage ? profileImage.url : images[0].url}
-                      />
-                    </ImageContainer>
-                  </BaseInfoWrapper>
-                  <BioText>{bio}</BioText>
-                  <TitledTrainerSection label="Gender: " values={['Male']} />
-                  <JoinedData
-                    title="Fitness Training Experience"
-                    label="Joined Jijo:"
-                    trainerSinceValue={trainerSince}
-                    trainerExperience={trainerSince}
-                    joinedData={joinDate}
-                  />
-
-                  {/* <TitledTrainerSection
-                  title="Fitness Certifications"
-                >
-                  {certificates.map((c) => (
-                    <CertificateItemProf
-                      key={c.id}
-                      certificate={c}
-                      certificateNumber={getCertificateNumber(
-                        c.id,
-                        certificates,
-                      )}
+          <Media query={GLOBAL_MEDIA_QUERIES.mdUp}>
+            <ColumnsWrapper>
+              <BigColumn>
+                <TrainerDetailsWrap>
+                  <BasicInfoContainer>
+                    <BaseInfoWrapper>
+                      <ImageContainer>
+                        <img
+                          alt={name}
+                          src={profileImage ? profileImage.url : images[0].url}
+                        />
+                      </ImageContainer>
+                    </BaseInfoWrapper>
+                    <BioText>{bio}</BioText>
+                    <TitledTrainerSection label="Gender: " values={['Male']} />
+                    <JoinedData
+                      title="Fitness Training Experience"
+                      label="Joined Jijo:"
+                      trainerSinceValue={trainerSince}
+                      trainerExperience={trainerSince}
+                      joinedData={joinDate}
                     />
-                  ))}
-                </TitledTrainerSection> */}
 
-                  <TitledTrainerSection
-                    title="Preferred Client Attributes"
-                    values={preferredTraineePersonality}
-                  />
-                  <TitledTrainerSection
-                    title="Age Group Focus"
-                    values={preferredAgeGroup}
-                  />
-                  <TitledTrainerSection
-                    title="Instruction Type Offered"
-                    values={instructionType}
-                  />
-                  <TitledTrainerSection
-                    title="Class Types"
-                    values={classType}
-                  />
-                  <TitledTrainerSection
-                    title="Training Style"
-                    values={personality}
-                  />
+                    <TitledTrainerSection title="Fitness Certifications">
+                      {certificates.length > 0 &&
+                        certificates.map((c) => (
+                          <CertificateItemProf
+                            key={c.id}
+                            certificate={c}
+                            certificateNumber={CertificateUtils.getCertificateNumber(
+                              c.id,
+                              certificates,
+                            )}
+                          />
+                        ))}
+                    </TitledTrainerSection>
 
-                  <TitledTrainerSection title="Social Media">
-                    <>
-                      {!!instagram && (
-                        <SocialMediaItem type="instagram" url={instagram} />
-                      )}
-                      {!!facebook && (
-                        <SocialMediaItem type="facebook" url={facebook} />
-                      )}
-                      {!!twitter && (
-                        <SocialMediaItem type="twitter" url={twitter} />
-                      )}
-                      {!!linkedIn && (
-                        <SocialMediaItem type="linkedIn" url={linkedIn} />
-                      )}
-                    </>
-                  </TitledTrainerSection>
-                </BasicInfoContainer>
-              </TrainerDetailsWrap>
-            </BigColumn>
-            <Column>
-              <PricingSection
-                pricings={pricings}
-              />
-            </Column>
-          </ColumnsWrapper>
+                    <TitledTrainerSection
+                      title="Preferred Client Attributes"
+                      values={preferredTraineePersonality}
+                    />
+                    <TitledTrainerSection
+                      title="Age Group Focus"
+                      values={preferredAgeGroup}
+                    />
+                    <TitledTrainerSection
+                      title="Instruction Type Offered"
+                      values={instructionType}
+                    />
+                    <TitledTrainerSection
+                      title="Class Types"
+                      values={classType}
+                    />
+                    <TitledTrainerSection
+                      title="Training Style"
+                      values={personality}
+                    />
+
+                    <TitledTrainerSection title="Social Media">
+                      <>
+                        {!!instagram && (
+                          <SocialMediaItem type="instagram" url={instagram} />
+                        )}
+                        {!!facebook && (
+                          <SocialMediaItem type="facebook" url={facebook} />
+                        )}
+                        {!!twitter && (
+                          <SocialMediaItem type="twitter" url={twitter} />
+                        )}
+                        {!!linkedIn && (
+                          <SocialMediaItem type="linkedIn" url={linkedIn} />
+                        )}
+                      </>
+                    </TitledTrainerSection>
+                  </BasicInfoContainer>
+                </TrainerDetailsWrap>
+              </BigColumn>
+              <Column>
+                <PricingSection pricings={pricings} />
+                <>
+                  <NextClassesTitle>Next Classes</NextClassesTitle>
+                  <ClassDetailsBookBox
+                    BookClass={null}
+                    nextSessions={[]}
+                    onDetailsClick={null}
+                  />
+                </>
+              </Column>
+            </ColumnsWrapper>
+          </Media>
+          <Media query={GLOBAL_MEDIA_QUERIES.small}>
+            <ColumnsWrapper>
+              <BigColumn>
+                <TrainerProfileMobile
+                  pricings={pricings}
+                  instagram={instagram}
+                  facebook={facebook}
+                  linkedIn={linkedIn}
+                  twitter={twitter}
+                  certificates={certificates}
+                  trainerSince={trainerSince}
+                  joinDate={joinDate}
+                  preferredTraineePersonality={preferredTraineePersonality}
+                  preferredAgeGroup={preferredAgeGroup}
+                  instructionType={instructionType}
+                  classType={classType}
+                  personality={personality}
+                />
+              </BigColumn>
+            </ColumnsWrapper>
+          </Media>
         </CenteredContent>
       </TrainerInfoWrapper>
     </>
@@ -327,6 +362,13 @@ const ImageContainer = styled.div`
 const BasicInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const NextClassesTitle = styled.div`
+  font-size: 24px;
+  margin: 15px 0px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export default TrainerProfile;
