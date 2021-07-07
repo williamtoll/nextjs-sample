@@ -12,14 +12,17 @@ export const CertificateItemProf: React.FC<Props> = ({
   certificateNumber,
 }) => {
   return (
-    <CertContainer display="flex" flexDirection="column">
-      <CertificateContainer>
-        <CertificateName noMargin>{certificate.name}</CertificateName>
-        <CertificateNumberText>ID: {certificateNumber}</CertificateNumberText>
+    <CertContainer>
+      <CertificateData>
+        <CertificateContainer>
+          <CertificateName noMargin>{certificate.name}</CertificateName>
+          <CertificateNumberText>ID: {certificateNumber}</CertificateNumberText>
+        </CertificateContainer>
         <IconContainer>
-          <CheckedIconCircle />
+            <CheckedIconCircle />
         </IconContainer>
-      </CertificateContainer>
+      </CertificateData>
+
       <OtherCertificate>
         {certificate.id !== 18 && <Image src={certificate.logoUrl} />}
 
@@ -30,6 +33,8 @@ export const CertificateItemProf: React.FC<Props> = ({
 };
 
 const CertContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 180px;
   height: 150px;
@@ -38,6 +43,11 @@ const CertContainer = styled.div`
   overflow: hidden;
   margin-right: 16px;
   margin-bottom: 16px;
+`;
+
+const CertificateData=styled.div`
+  display: flex;
+  justift-content: space-between;
 `;
 
 const CertificateNumberText = styled.span`
@@ -70,19 +80,19 @@ const ImageOther = styled.img`
 `;
 
 const CertificateContainer = styled.div`
-  width: '100%';
-  display: 'flex';
-  justifycontent: 'space-between';
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const IconContainer = styled.div`
-  paddingright: '10px';
-  paddingtop: '10px';
+  padding-right: 10px;
+  padding-top: 10px;
 `;
 
 const OtherCertificate = styled.div`
-  width: '100%';
-  display: 'flex';
-  margintop: '15px';
-  justifycontent: 'center';
+  width: 100%;
+  display: flex;
+  margin-top: 15px;
+  justify-content: center;
 `;

@@ -120,17 +120,18 @@ const PriceHeader = styled.div`
   margin-top: 8px;
 `;
 
+    // width: 100vw;
+    // position: relative;
+    // left: 50%;
+    // right: 50%;
+    // margin-left: -50vw;
+    // margin-right: -50vw;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   @media (max-width: 600px) {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    padding: 8px;
   }
 `;
 
@@ -190,7 +191,6 @@ const PricingsContainer = styled.div<{ isLast?: boolean }>`
   padding: 8px;
   background: ${({ theme }) => theme.colors.lighterPurple};
   border-radius: 0.2rem;
-  padding: 16px;
 `;
 
 const PricingGroup = styled.div`

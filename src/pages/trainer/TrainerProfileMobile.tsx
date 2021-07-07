@@ -5,7 +5,7 @@ import { ClassDetailsBookBox } from './components/ClassDetailsBookBox';
 import { CertificateItemProf } from './components/ClientCertificateProf';
 import { PricingSection } from './components/PricingSection';
 import { SocialMediaItem } from './components/SocialMediaItem';
-import TitledTrainerSection from './TitledTrainerSection';
+import TitledTrainerSection from './components/TitledTrainerSection';
 import { TrainerCertificate } from './types';
 import * as CertificateUtils from '../../utils/certificate';
 
@@ -44,6 +44,7 @@ const TrainerProfile: React.FC<Props> = ({
   const openTab = useCallback((evt, tabName) => {
     let i;
     const tabContent = document.getElementsByClassName('tabcontent');
+    console.log('tabContent', tabContent);
     for (i = 0; i < tabContent.length; i++) {
       tabContent[i].style.display = 'none';
     }
@@ -94,8 +95,8 @@ const TrainerProfile: React.FC<Props> = ({
           </StyledTab>
         </StyledLink>
       </StyleAppBar>
-      <TabPanel id="attributes">
-        <RightTitles>Prices</RightTitles>
+      <TabPanel id="attributes" className="tabcontent">
+        <RightTitles>---</RightTitles>
         <TitledTrainerSection
           title="Preferred Client Attributes"
           values={preferredTraineePersonality}
@@ -122,11 +123,11 @@ const TrainerProfile: React.FC<Props> = ({
           </>
         </TitledTrainerSection>
       </TabPanel>
-      <TabPanel id="prices">
+      <TabPanel id="prices" className="tabcontent">
         <RightTitles>Prices</RightTitles>
         <PricingSection pricings={pricings} />
       </TabPanel>
-      <TabPanel id="classes">
+      <TabPanel id="classes" className="tabcontent">
         <>
           <NextClassesTitle>Next Classes</NextClassesTitle>
           <ClassDetailsBookBox
@@ -136,7 +137,7 @@ const TrainerProfile: React.FC<Props> = ({
           />
         </>
       </TabPanel>
-      <TabPanel id="credentials">
+      <TabPanel id="credentials" className="tabcontent">
         {certificates.length > 0 &&
           certificates.map((c) => (
             <CertificateItemProf
@@ -155,9 +156,8 @@ const TrainerProfile: React.FC<Props> = ({
 
 const TabPanel = styled.div`
   width: 100%;
-  border: 3px solid #efefef;
-  border-radius: 6px;
   display: none;
+  padding: 8px;
 `;
 
 const StyleAppBar = styled.div`
