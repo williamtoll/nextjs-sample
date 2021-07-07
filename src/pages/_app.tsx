@@ -10,6 +10,24 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: Mukta;
   }
+
+  @media screen and (max-width: 599px){
+    .displayMobile{
+      display: block;
+    }
+    .displayMdUp{
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 600px){
+    .displayMobile{
+      display: none;
+    }
+    .displayMdUp{
+      display: block;
+    }
+  }
 `;
 
 const theme = {

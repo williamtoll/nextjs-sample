@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { ClassDetailsBookBox } from './components/ClassDetailsBookBox';
@@ -8,6 +7,7 @@ import { SocialMediaItem } from './components/SocialMediaItem';
 import TitledTrainerSection from './components/TitledTrainerSection';
 import { TrainerCertificate } from './types';
 import * as CertificateUtils from '../../utils/certificate';
+import { useEffect } from 'react';
 
 type Props = {
   pricings: Object;
@@ -36,17 +36,11 @@ const TrainerProfile: React.FC<Props> = ({
   classType,
   personality,
 }) => {
-  const [selectedTab, setSelectedTab] = React.useState(0);
-  const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setSelectedTab(newValue);
-  };
-
   const openTab = useCallback((evt, tabName) => {
     let i;
     const tabContent = document.getElementsByClassName('tabcontent');
-    console.log('tabContent', tabContent);
     for (i = 0; i < tabContent.length; i++) {
-      tabContent[i].style.display = 'none';
+      tabContent[i].setAttribute('style', 'display: none');
     }
     const tabLinks = document.getElementsByClassName('tablinks');
     for (i = 0; i < tabLinks.length; i++) {
@@ -56,21 +50,17 @@ const TrainerProfile: React.FC<Props> = ({
     evt.currentTarget.className += ' active';
   }, []);
 
+  useEffect(() => {
+    openTab(event, 'profile');
+  }, []);
+
   return (
     <>
-      <StyleAppBar position="static">
-        <StyledLink
-          variant="scrollable"
-          indicatorColor="primary"
-          textColor="primary"
-          scrollButtons="auto"
-          value={selectedTab}
-          onChange={handleTabChange}
-          aria-label=""
-        >
+      <StyleAppBar>
+        <StyledLink>
           <StyledTab
             label="Trainer"
-            onclick={(event) => openTab(event, 'attributes')}
+            onClick={(event) => openTab(event, 'profile')}
           >
             Trainer
           </StyledTab>
@@ -95,8 +85,11 @@ const TrainerProfile: React.FC<Props> = ({
           </StyledTab>
         </StyledLink>
       </StyleAppBar>
-      <TabPanel id="attributes" className="tabcontent">
-        <RightTitles>---</RightTitles>
+      <TabPanel
+        style={{ display: 'block' }}
+        id="profile"
+        className="tabcontent"
+      >
         <TitledTrainerSection
           title="Preferred Client Attributes"
           values={preferredTraineePersonality}
@@ -125,7 +118,7 @@ const TrainerProfile: React.FC<Props> = ({
       </TabPanel>
       <TabPanel id="prices" className="tabcontent">
         <RightTitles>Prices</RightTitles>
-        <PricingSection pricings={pricings} />
+        <PricingSection />
       </TabPanel>
       <TabPanel id="classes" className="tabcontent">
         <>
@@ -162,21 +155,18 @@ const TabPanel = styled.div`
 
 const StyleAppBar = styled.div`
   display: flex;
+  flex-direction: row !important;
   scrollbar-width: none;
   color: #4c33c3 !important;
-  background-color: #fff !important;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
   box-shadow: none !important;
-
-  &.MuiTab-root {
-    text-transform: none !important;
-  }
 `;
 
 const StyledLink = styled.div`
   display: flex;
+  flex-direction: row !important;
   overflow-x: scroll;
   :visited {
     text-decoration: none;
@@ -187,13 +177,6 @@ const StyledLink = styled.div`
   margin-top: 10px;
   padding-bottom: 10px;
   text-transform: none !important;
-  .MuiTabs-flexContainer {
-    border-bottom: 3px solid ${({ theme }) => theme.colors.lightGrey};
-  }
-  .MuiTabs-indicator {
-    height: 3px !important;
-    border-radius: 20px !important;
-  }
 `;
 
 const StyledTab = styled.button`
@@ -208,7 +191,7 @@ const StyledTab = styled.button`
   padding: 6px 12px;
   overflow: hidden;
   position: relative;
-  font-size: 1.5999999999999999rem;
+  font-size: 16px;
   max-width: 264px;
   min-width: 72px;
   box-sizing: border-box;

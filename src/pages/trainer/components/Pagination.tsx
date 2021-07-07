@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import selectIcon from '../../../images/expand_less.png';
 
 const PaginationStyled = styled.footer`
   display: flex;
@@ -17,7 +16,6 @@ const Select = styled.select`
   padding: 1.2rem 3rem 1.2rem 1.4rem;
   border: 1px solid ${({ theme }) => theme.colors.lightGrey};
   border-radius: 6px;
-  background: url(${selectIcon}) no-repeat top 1.75rem right 1.2rem;
   background-size: 1rem;
   appearance: none;
 `;

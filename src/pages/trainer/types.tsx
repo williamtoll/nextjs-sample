@@ -5,6 +5,7 @@ export type ImageType = {
 
 export type CalendarEvent = {
   id?: number;
+  name: string;
   classId?: number;
   type: string;
   start: Date;
@@ -25,6 +26,11 @@ export type CalendarEvent = {
   primary?: boolean;
   hideExtraTime?: boolean;
   hideFrequency?: boolean;
+  isInviteOnly: boolean;
+  instructionType:{
+    id: number;
+    name: string;
+  }
 };
 
 export type TrainerCertificate = {

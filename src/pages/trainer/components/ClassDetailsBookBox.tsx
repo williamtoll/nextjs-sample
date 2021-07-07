@@ -49,8 +49,7 @@ export const ClassDetailsBookBox: React.FC<Props> = ({
 
       {view.map((event, i, array) => {
         const TrainingTypeIcon =
-          event?.classDetail?.class?.instructionType?.id ===
-          InstructionType.Group
+          event?.instructionType?.id === InstructionType.Group
             ? GroupIcon
             : PersonIcon;
 
@@ -86,9 +85,7 @@ export const ClassDetailsBookBox: React.FC<Props> = ({
 
               <BoxPurple>
                 <div>
-                  <LinkBox onClick={null}>
-                    {event?.classDetail?.class.name}
-                  </LinkBox>
+                  <LinkBox onClick={null}>{event?.name}</LinkBox>
                   <TimeZoneBox>
                     <DateTitle>
                       {DateUtils.formatDatePeriodWithTimeZone(
@@ -100,7 +97,7 @@ export const ClassDetailsBookBox: React.FC<Props> = ({
                   </TimeZoneBox>
                   <Participant>
                     {event.participantIds.length} Participants
-                    <ViewDetails onClick={() => onDetailsClick(event)}>
+                    <ViewDetails onClick={() => onDetailsClick(null)}>
                       Click to View Details
                     </ViewDetails>
                   </Participant>
@@ -108,8 +105,7 @@ export const ClassDetailsBookBox: React.FC<Props> = ({
                   <FooterButtons>
                     <TypeButtons>
                       <TrainingTypeIcon />
-                      {event?.classDetail?.class?.instructionType?.id ===
-                      InstructionType.Group ? (
+                      {event?.instructionType?.id === InstructionType.Group ? (
                         <GroupTitle>GROUP</GroupTitle>
                       ) : (
                         <GroupTitle>PRIVATE</GroupTitle>
@@ -129,7 +125,7 @@ export const ClassDetailsBookBox: React.FC<Props> = ({
                   <div>
                     <BookedButtons>
                       <>
-                        <BlueButton onClick={() => BookClass(event)}>
+                        <BlueButton onClick={() => BookClass(null)}>
                           Book
                         </BlueButton>
                       </>

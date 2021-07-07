@@ -12,10 +12,7 @@ type Props = {
 
 const PricingValueUi: React.FC<Props> = ({ isSelected, cartItem }) => {
   return (
-    <PricingContainer
-      selected={isSelected}
-      onClick={() => (onClick ? onClick(cartItem) : null)}
-    >
+    <PricingContainer selected={isSelected} onClick={null}>
       {isSelected ? (
         <IconContainer>
           <CheckCircleIcon />
@@ -114,10 +111,9 @@ const PricingLabel = styled.span`
 `;
 
 const PricingLabelSuscription = styled.span`
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 140%;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
   color: ${({ theme }) => theme.colors.primary};
   text-align: left;
   font-size: 13px;

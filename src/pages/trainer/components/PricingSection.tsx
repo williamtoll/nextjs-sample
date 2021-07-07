@@ -120,12 +120,6 @@ const PriceHeader = styled.div`
   margin-top: 8px;
 `;
 
-    // width: 100vw;
-    // position: relative;
-    // left: 50%;
-    // right: 50%;
-    // margin-left: -50vw;
-    // margin-right: -50vw;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -143,7 +137,6 @@ const ButtonItemBox = styled.div`
 `;
 
 const ButtonItemText = styled.div`
-  display: none;
   @media screen and (min-width: 1200px) {
     text-transform: capitalize;
     font-size: 16px;
@@ -166,14 +159,13 @@ const ButtonItem = styled.div`
   align-items: center;
   justify-content: center;
   transition: hover 1s;
-  width: 26px;
-  height: 26px;
+  width: 100%;
+  height: 30px;
   &:hover {
     background-color: lighten(#4c33c3, 20);
   }
   @media screen and (min-width: 1200px) {
     height: 40px;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

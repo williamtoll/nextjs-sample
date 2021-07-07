@@ -10,8 +10,6 @@ import JoinedData from './components/JoinedData';
 import { SocialMediaItem } from './components/SocialMediaItem';
 import { PricingSection } from './components/PricingSection';
 import TrainerProfileMobile from './TrainerProfileMobile';
-import { GLOBAL_MEDIA_QUERIES } from '../../shared/constants';
-import Media from 'react-media';
 import { ClassDetailsBookBox } from './components/ClassDetailsBookBox';
 import { CertificateItemProf } from './components/ClientCertificateProf';
 import * as CertificateUtils from '../../utils/certificate';
@@ -56,41 +54,33 @@ const TrainerProfile: React.FC<Props> = ({
   classType,
   personality,
 }) => {
-  const handleGoHomeClick = () => {
-    window.location.href = 'https://myjijo.com';
-  };
-
   return (
     <>
       <StyledContainer>
         <HeaderWrapper>
-          <IconWrapper onClick={handleGoHomeClick}>
+          <IconWrapper href={'https://myjijo.com'}>
             <JijoIcon />
           </IconWrapper>
         </HeaderWrapper>
         <TrainerInfoWrapper>
           <CenteredContent>
             <ProfileHeader trainerName={name}></ProfileHeader>
-            <Media query={GLOBAL_MEDIA_QUERIES.mdUp}>
-              <ColumnsWrapper>
-                <BigColumn>
-                  <TrainerDetailsWrap>
-                    <BasicInfoContainer>
-                      <BaseInfoWrapper>
-                        <ImageContainer>
-                          <img
-                            alt={name}
-                            src={
-                              profileImage ? profileImage.url : images[0].url
-                            }
-                          />
-                        </ImageContainer>
-                      </BaseInfoWrapper>
-                      <BioText>{bio}</BioText>
-                      <TitledTrainerSection
-                        label="Gender: "
-                        values={['Male']}
-                      />
+
+            <ColumnsWrapper>
+              <BigColumn>
+                <TrainerDetailsWrap>
+                  <BasicInfoContainer>
+                    <BaseInfoWrapper>
+                      <ImageContainer>
+                        <img
+                          alt={name}
+                          src={profileImage ? profileImage.url : images[0].url}
+                        />
+                      </ImageContainer>
+                    </BaseInfoWrapper>
+                    <BioText>{bio}</BioText>
+                    <TitledTrainerSection label="Gender: " values={['Male']} />
+                    <div className="displayMdUp">
                       <JoinedData
                         title="Fitness Training Experience"
                         label="Joined Jijo:"
@@ -150,12 +140,14 @@ const TrainerProfile: React.FC<Props> = ({
                           )}
                         </>
                       </TitledTrainerSection>
-                    </BasicInfoContainer>
-                  </TrainerDetailsWrap>
-                </BigColumn>
+                    </div>
+                  </BasicInfoContainer>
+                </TrainerDetailsWrap>
+              </BigColumn>
+              <div className="displayMdUp">
                 <Column>
                   <Subtitle>Pricing</Subtitle>
-                  <PricingSection pricings={pricings} />
+                  <PricingSection />
                   <>
                     <Subtitle>Next Classes</Subtitle>
                     <ClassDetailsBookBox
@@ -165,11 +157,11 @@ const TrainerProfile: React.FC<Props> = ({
                     />
                   </>
                 </Column>
-              </ColumnsWrapper>
-            </Media>
-            <Media query={GLOBAL_MEDIA_QUERIES.small}>
+              </div>
+            </ColumnsWrapper>
+            <div className="displayMobile">
               <ColumnsWrapper>
-                <BigColumn>
+                <Column>
                   <TrainerProfileMobile
                     pricings={pricings}
                     instagram={instagram}
@@ -177,17 +169,15 @@ const TrainerProfile: React.FC<Props> = ({
                     linkedIn={linkedIn}
                     twitter={twitter}
                     certificates={certificates}
-                    trainerSince={trainerSince}
-                    joinDate={joinDate}
                     preferredTraineePersonality={preferredTraineePersonality}
                     preferredAgeGroup={preferredAgeGroup}
                     instructionType={instructionType}
                     classType={classType}
                     personality={personality}
                   />
-                </BigColumn>
+                </Column>
               </ColumnsWrapper>
-            </Media>
+            </div>
           </CenteredContent>
         </TrainerInfoWrapper>
       </StyledContainer>
@@ -303,7 +293,7 @@ const HeaderWrapper = styled.header`
   ${CenteredCss}
 `;
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.a`
   transition: opacity 0.5s ease-in-out;
   :hover {
     opacity: 0.8;

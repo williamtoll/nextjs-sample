@@ -1,10 +1,11 @@
 import { CheckedIconCircle } from 'images/CheckedIconCircle';
 import React from 'react';
 import styled from 'styled-components';
-import { Certificate } from '../types';
+import { TrainerCertificate } from '../types';
+
 
 type Props = {
-  certificate: Certificate;
+  certificate: TrainerCertificate;
   certificateNumber: string | undefined;
 };
 export const CertificateItemProf: React.FC<Props> = ({
