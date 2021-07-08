@@ -65,13 +65,10 @@ const TrainerProfile: React.FC<Props> = ({
   useEffect(() => {
     if (nextSessions && nextSessions.result) {
       setBookingSlots(nextSessions.result);
-      console.log('bookingSlots fe', bookingSlots);
     }
   }, [nextSessions]);
 
-  useEffect(() => {
-    console.log('booking slots ', bookingSlots);
-  }, [bookingSlots]);
+  useEffect(() => {}, [bookingSlots]);
 
   return (
     <>
