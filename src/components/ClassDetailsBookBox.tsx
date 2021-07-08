@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import * as DateUtils from '../../../utils/date';
+import * as DateUtils from '../utils/date';
 import { usePagination } from 'utils/usePagination';
 import { Pagination } from './Pagination';
 import { GroupIcon } from 'images/GroupIcon';
 import { PersonIcon } from 'images/PersonIcon';
-import { CalendarEvent } from '../types';
-import { InstructionType } from 'shared/constants';
+import { CalendarEvent } from 'shared/types';
+import { InstructionType } from 'shared/enums';
 
 type Props = {
   nextSessions: CalendarEvent[];
@@ -21,6 +21,8 @@ export const ClassDetailsBookBox: React.FC<Props> = ({
   onDetailsClick,
 }) => {
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  console.log('booking slots ', nextSessions);
 
   const {
     pageSize,
@@ -49,7 +51,7 @@ export const ClassDetailsBookBox: React.FC<Props> = ({
 
       {view.map((event, i, array) => {
         const TrainingTypeIcon =
-          event?.instructionType?.id === InstructionType.Group
+          event?.instructionType === InstructionType.Group
             ? GroupIcon
             : PersonIcon;
 
@@ -96,7 +98,7 @@ export const ClassDetailsBookBox: React.FC<Props> = ({
                     </DateTitle>
                   </TimeZoneBox>
                   <Participant>
-                    {event.participantIds.length} Participants
+                    {event.numberOfParticipants} Participants
                     <ViewDetails onClick={() => onDetailsClick(null)}>
                       Click to View Details
                     </ViewDetails>
@@ -105,18 +107,14 @@ export const ClassDetailsBookBox: React.FC<Props> = ({
                   <FooterButtons>
                     <TypeButtons>
                       <TrainingTypeIcon />
-                      {event?.instructionType?.id === InstructionType.Group ? (
+                      {event?.instructionType === InstructionType.Group ? (
                         <GroupTitle>GROUP</GroupTitle>
                       ) : (
                         <GroupTitle>PRIVATE</GroupTitle>
                       )}
                     </TypeButtons>
                     <OpenButtons>
-                      {!event?.isInviteOnly ? (
-                        <GroupTitle>OPEN TO EVERYONE</GroupTitle>
-                      ) : (
-                        <GroupTitle>INVITE ONLY</GroupTitle>
-                      )}
+                      <GroupTitle>OPEN TO EVERYONE</GroupTitle>
                     </OpenButtons>
                   </FooterButtons>
                 </div>
@@ -302,3 +300,6 @@ const BoxContainer = styled.div`
 const MainContainer = styled.div<{ isFirst: boolean }>`
   margin-top: ${({ isFirst }) => (isFirst ? '0px' : '25px')};
 `;
+
+
+export default ClassDetailsBookBox;

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PricingValue } from './PriceValue';
+import PriceValue from './PriceValue';
 
-const PricingSectionUi: React.FC = () => {
+const PricingSection: React.FC = () => {
   const cartData = [
     {
       id: 375,
@@ -94,12 +94,7 @@ const PricingSectionUi: React.FC = () => {
             <PricingGroup>
               {pricing.items.map((item) => {
                 return (
-                  <PricingValue
-                    key={item.id}
-                    cartItem={item}
-                    onClick={null}
-                    isSelected={null}
-                  />
+                  <PriceValue key={item.id} cartItem={item} isSelected={null} />
                 );
               })}
             </PricingGroup>
@@ -219,4 +214,4 @@ const InstructionTypeLabel = styled.h5`
   font-weight: 700;
 `;
 
-export const PricingSection = React.memo(PricingSectionUi);
+export default PricingSection;

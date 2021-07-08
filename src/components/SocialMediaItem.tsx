@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styled  from 'styled-components';
-import { socialIconsMap } from '../constants';
+import { socialIconsMap } from 'shared/icons';
 
 interface SocialMediaItemProps {
   type: keyof typeof socialIconsMap;
@@ -34,3 +34,5 @@ export const SocialMediaItem: React.FC<SocialMediaItemProps> = ({
     </ClientContainer>
   );
 };
+
+export default SocialMediaItem;

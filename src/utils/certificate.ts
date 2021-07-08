@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { TrainerCertificate } from 'pages/trainer/types';
+import { TrainerCertificate } from 'shared/types';
 
 export const getCertificateNumber = (
   certId: number,

@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { ClassDetailsBookBox } from './components/ClassDetailsBookBox';
-import { CertificateItemProf } from './components/ClientCertificateProf';
-import { PricingSection } from './components/PricingSection';
-import { SocialMediaItem } from './components/SocialMediaItem';
-import TitledTrainerSection from './components/TitledTrainerSection';
-import { TrainerCertificate } from './types';
-import * as CertificateUtils from '../../utils/certificate';
+import { ClassDetailsBookBox } from '../components/ClassDetailsBookBox';
+import { CertificateItemProf } from '../components/ClientCertificateProf';
+import PricingSection from '../components/PricingSection';
+import { SocialMediaItem } from '../components/SocialMediaItem';
+import TitledTrainerSection from '../components/TitledTrainerSection';
+import { TrainerCertificate } from 'shared/types';
+import * as CertificateUtils from '../utils/certificate';
 import { useEffect } from 'react';
 
 type Props = {

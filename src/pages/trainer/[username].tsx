@@ -2,18 +2,20 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import styled from 'styled-components';
-import { ProfileHeader } from './components/ProfileHeader';
-import TitledTrainerSection from './components/TitledTrainerSection';
-import { ImageType, TrainerCertificate } from './types';
+import ProfileHeader from '../../components/ProfileHeader';
+import TitledTrainerSection from '../../components/TitledTrainerSection';
+import { CalendarEvent, ImageType, TrainerCertificate } from 'shared/types';
 import CenteredCss from '../../styles/CenteredCss';
-import JoinedData from './components/JoinedData';
-import { SocialMediaItem } from './components/SocialMediaItem';
-import { PricingSection } from './components/PricingSection';
-import TrainerProfileMobile from './TrainerProfileMobile';
-import { ClassDetailsBookBox } from './components/ClassDetailsBookBox';
-import { CertificateItemProf } from './components/ClientCertificateProf';
+import JoinedData from '../../components/JoinedData';
+import { SocialMediaItem } from '../../components/SocialMediaItem';
+import PricingSection from '../../components/PricingSection';
+import TrainerProfileMobile from '../../fragments/TrainerProfileMobile';
+import { ClassDetailsBookBox } from '../../components/ClassDetailsBookBox';
+import { CertificateItemProf } from '../../components/ClientCertificateProf';
 import * as CertificateUtils from '../../utils/certificate';
 import { JijoIcon } from 'images/JijoIcon';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 type Props = {
   name: string;
@@ -33,6 +35,7 @@ type Props = {
   instructionType: string[];
   classType: string[];
   personality: string[];
+  nextSessions: any;
 };
 
 const TrainerProfile: React.FC<Props> = ({
@@ -53,7 +56,23 @@ const TrainerProfile: React.FC<Props> = ({
   instructionType,
   classType,
   personality,
+  nextSessions,
 }) => {
+  console.log('nextSessions fe', nextSessions);
+
+  const [bookingSlots, setBookingSlots] = useState();
+
+  useEffect(() => {
+    if (nextSessions && nextSessions.result) {
+      setBookingSlots(nextSessions.result);
+      console.log('bookingSlots fe', bookingSlots);
+    }
+  }, [nextSessions]);
+
+  useEffect(() => {
+    console.log('booking slots ', bookingSlots);
+  }, [bookingSlots]);
+
   return (
     <>
       <StyledContainer>
@@ -65,7 +84,6 @@ const TrainerProfile: React.FC<Props> = ({
         <TrainerInfoWrapper>
           <CenteredContent>
             <ProfileHeader trainerName={name}></ProfileHeader>
-
             <ColumnsWrapper>
               <BigColumn>
                 <TrainerDetailsWrap>
@@ -148,14 +166,12 @@ const TrainerProfile: React.FC<Props> = ({
                 <Column>
                   <Subtitle>Pricing</Subtitle>
                   <PricingSection />
-                  <>
-                    <Subtitle>Next Classes</Subtitle>
-                    <ClassDetailsBookBox
+                  {/* <Subtitle>Next Classes</Subtitle>
+                   <ClassDetailsBookBox
                       BookClass={null}
-                      nextSessions={[]}
+                      nextSessions={bookingSlots}
                       onDetailsClick={null}
-                    />
-                  </>
+                    /> */}
                 </Column>
               </div>
             </ColumnsWrapper>
@@ -190,6 +206,20 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { username } = params;
   const res = await fetch(`${API_URL}/trainer/${username}`);
   let data = await res.json();
+
+  const resNextSessions = await fetch(
+    `${API_URL}/trainee/trainer/${username}/sessions?isScoreRequired=false`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3OTZiYzJmYy1iZDZjLTQ1YzMtOWU1Yy1mYjFiNGZjZjYzNjYiLCJuYW1laWQiOiI4OSIsImVtYWlsIjoid3RvbGVkbytjbGllbnRlMTFAbXlqaWpvLmNvbSIsImdpdmVuX25hbWUiOiJ3dG9sZWRvIGNsaWVudCIsImZhbWlseV9uYW1lIjoidG9sbCIsImlzSW5zdGFudENsYXNzRmVhdHVyZUVuYWJsZWQiOiJGYWxzZSIsImF1dGhtZXRob2QiOiJwYXNzd29yZCIsInJvbGUiOiJDbGllbnQiLCJuYmYiOjE2MjU1NzM1OTksImV4cCI6MTYyNjAwNTU5OSwiaWF0IjoxNjI1NTczNTk5LCJpc3MiOiJTZWN1cmVBcGkiLCJhdWQiOiJTZWN1cmVBcGlVc2VyIn0.c-f7M154irI9OGHpkLI2-qk4oKwH1Bw_m_cWNSKsvJ4',
+      },
+    },
+  );
+  const nextSessions = await resNextSessions.json();
+
+  console.log('nextSessions ssr ', nextSessions);
 
   data = {
     result: {
@@ -275,6 +305,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   return {
     props: {
       ...data.result,
+      nextSessions,
     },
   };
 };

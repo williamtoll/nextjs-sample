@@ -4,7 +4,6 @@ import { LinkedinIcon } from 'images/LinkedinIcon';
 import { TwitterIcon } from 'images/TwitterIcon';
 import React from 'react';
 
-
 export const socialIconsMap = {
   twitter: <TwitterIcon />,
   facebook: <FacebookIcon />,

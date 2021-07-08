@@ -113,3 +113,5 @@ export const Pagination: React.FC<Props> = ({
     </PaginationStyled>
   );
 };
+
+export default Pagination;

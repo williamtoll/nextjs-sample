@@ -2,15 +2,16 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import * as MoneyUtils from '../../../utils/money';
-import { CheckCircleIcon } from '../../../images/CheckCircleIcon';
+import * as MoneyUtils from '../utils/money';
+import { CheckCircleIcon } from '../images/CheckCircleIcon';
+import { CartItem } from 'shared/types';
 
 type Props = {
   isSelected: boolean;
-  cartItem: Object;
+  cartItem: CartItem;
 };
 
-const PricingValueUi: React.FC<Props> = ({ isSelected, cartItem }) => {
+const PricingValue: React.FC<Props> = ({ isSelected, cartItem }) => {
   return (
     <PricingContainer selected={isSelected} onClick={null}>
       {isSelected ? (
@@ -148,4 +149,4 @@ const NumberPrice = styled.div`
   color: #4c33c3;
 `;
 
-export const PricingValue = React.memo(PricingValueUi);
+export default PricingValue;

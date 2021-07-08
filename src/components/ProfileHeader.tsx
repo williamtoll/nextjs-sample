@@ -7,7 +7,7 @@ type Props = {
   children?: React.ReactNode;
 };
 
-const ProfileHeaderUI: React.FC<Props> = ({ trainerName, children }) => (
+const ProfileHeader: React.FC<Props> = ({ trainerName, children }) => (
   <>
     <HeaderWrapper>
       <NameLabel noMargin>{trainerName}</NameLabel>
@@ -39,4 +39,4 @@ const NameLabel = styled.span`
   font-weight: bold;
 `;
 
-export const ProfileHeader = React.memo(ProfileHeaderUI);
+export default ProfileHeader;

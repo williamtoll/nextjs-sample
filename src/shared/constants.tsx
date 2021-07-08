@@ -4,10 +4,3 @@ export const GLOBAL_MEDIA_QUERIES = {
   large: '(min-width: 1200px)',
   mdUp: '(min-width: 600px)',
 };
-
-export enum InstructionType {
-    Group = 1,
-    Private = 2,
-}
-
-

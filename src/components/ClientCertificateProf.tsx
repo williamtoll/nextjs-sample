@@ -1,7 +1,7 @@
 import { CheckedIconCircle } from 'images/CheckedIconCircle';
 import React from 'react';
 import styled from 'styled-components';
-import { TrainerCertificate } from '../types';
+import { TrainerCertificate } from 'shared/types';
 
 
 type Props = {
@@ -97,3 +97,6 @@ const OtherCertificate = styled.div`
   margin-top: 15px;
   justify-content: center;
 `;
+
+
+export default CertificateItemProf;
