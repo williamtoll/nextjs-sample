@@ -68,8 +68,6 @@ const TrainerProfile: React.FC<Props> = ({
     }
   }, [nextSessions]);
 
-  useEffect(() => {}, [bookingSlots]);
-
   return (
     <>
       <StyledContainer>
@@ -163,12 +161,12 @@ const TrainerProfile: React.FC<Props> = ({
                 <Column>
                   <Subtitle>Pricing</Subtitle>
                   <PricingSection />
-                  {/* <Subtitle>Next Classes</Subtitle>
-                   <ClassDetailsBookBox
-                      BookClass={null}
-                      nextSessions={bookingSlots}
-                      onDetailsClick={null}
-                    /> */}
+                  <Subtitle>Next Classes</Subtitle>
+                  <ClassDetailsBookBox
+                    BookClass={null}
+                    nextSessions={bookingSlots}
+                    onDetailsClick={null}
+                  />
                 </Column>
               </div>
             </ColumnsWrapper>
