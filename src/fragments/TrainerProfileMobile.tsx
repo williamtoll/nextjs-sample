@@ -47,11 +47,11 @@ const TrainerProfile: React.FC<Props> = ({
       tabLinks[i].className = tabLinks[i].className.replace(' active', '');
     }
     document.getElementById(tabName).style.display = 'block';
-    evt.currentTarget.className += ' active';
+    if (evt) evt.currentTarget.className += ' active';
   }, []);
 
   useEffect(() => {
-    openTab(event, 'profile');
+    openTab(undefined, 'profile');
   }, []);
 
   return (
