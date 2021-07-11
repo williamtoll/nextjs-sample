@@ -185,11 +185,6 @@ const GridContainer = styled.div`
   }
 `;
 
-const HorizontalContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
 const StyledBox = styled.div`
   display: 'flex';
   flexdirection: 'column';
@@ -238,23 +233,6 @@ const ChipContainer = styled.div`
   }
   @media (max-width: 650px) {
     padding: 4px 12px;
-  }
-`;
-
-const DescriptionContainer = styled.div`
-  padding: 32px 0;
-  ${({ theme }) => css`
-    border-bottom: 1px solid ${theme.colors.lightGrey};
-    ${theme.mediaQueries.medium} {
-      padding: 0 0 24px 0;
-    }
-  `};
-`;
-
-const DetailsContainer = styled.div`
-  margin-top: 32px;
-  & > span {
-    padding-right: 32px;
   }
 `;
 
