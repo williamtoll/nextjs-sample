@@ -35,7 +35,6 @@ type Props = {
   bio: string;
   profileImage: ImageType;
   images: ImageType[];
-  pricings: Object;
   instagram: string;
   facebook: string;
   linkedIn: string;
@@ -56,7 +55,6 @@ const TrainerProfile: React.FC<Props> = ({
   bio,
   profileImage,
   images,
-  pricings,
   instagram,
   facebook,
   linkedIn,
@@ -71,7 +69,6 @@ const TrainerProfile: React.FC<Props> = ({
   personality,
   nextSessions,
 }) => {
-  console.log('nextSessions fe', nextSessions);
 
   const [bookingSlots, setBookingSlots] = useState();
 
@@ -227,8 +224,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
   );
   const nextSessions = await resNextSessions.json();
-
-  console.log('nextSessions ssr ', nextSessions);
 
   data = {
     result: {

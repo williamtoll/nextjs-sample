@@ -40,8 +40,6 @@ export const ClassDetailsBookBox: React.FC<Props> = ({
 }) => {
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-  console.log('booking slots ', nextSessions);
-
   const {
     pageSize,
     setPageSize,

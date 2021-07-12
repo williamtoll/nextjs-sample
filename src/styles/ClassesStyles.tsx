@@ -12,11 +12,11 @@ export const BoxClassInfo = styled.div<{ marginTop: string }>`
   display: ${({ marginTop }) => marginTop};
 `;
 
-export const BoxClassDetail = styled.div<{}>`
+export const BoxClassDetail = styled.div`
   padding-right: 20px;
   padding-top: 20px;
-  display:flex;
-  flexDirection: column;
+  display: flex;
+  flexdirection: column;
 `;
 
 export const ClassDetailBox = styled.div`
@@ -41,14 +41,14 @@ export const ClassContainer = styled.div<{
 `;
 export const TrainerInfo = styled.div`
   border: 2px solid #f2f2f2;
-  borderRadius: 6px;
+  borderradius: 6px;
   padding: 8px 10px;
   margin-top: 10px;
   display: flex;
   width: 100%;
   justify-content: space-between;
-  alignItems: center;
-  maxWidth: 309px;
+  alignitems: center;
+  maxwidth: 309px;
 `;
 
 export const TrainerName = styled.div`

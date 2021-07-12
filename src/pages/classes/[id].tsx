@@ -31,7 +31,7 @@ import {
   TrainerName,
 } from 'styles/ClassesStyles';
 
-import { withRouter, NextRouter } from 'next/router';
+import { NextRouter } from 'next/router';
 import { JijoIcon } from 'images/JijoIcon';
 import { IconWrapper } from 'styles/TrainerProfileStyles';
 import { HeaderWrapper, StyledContainer } from 'styles/GlobalStyles';
