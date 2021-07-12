@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Text = styled.span<{ isSmall?: boolean }>`
+export const StyledText = styled.span<{ isSmall?: boolean }>`
   ${({ theme, isSmall }) => `
     font-size: ${isSmall ? 12 : 14}px;
     display: block;

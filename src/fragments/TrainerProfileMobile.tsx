@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { ClassDetailsBookBox } from '../components/ClassDetailsBookBox';
-import { CertificateItemProf } from '../components/ClientCertificateProf';
+import { CertificateItemProf } from '../components/ClientCertificate';
 import PricingSection from '../components/PricingSection';
 import { SocialMediaItem } from '../components/SocialMediaItem';
 import TitledTrainerSection from '../components/TitledTrainerSection';

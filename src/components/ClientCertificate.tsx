@@ -1,8 +1,16 @@
 import { CheckedIconCircle } from 'images/CheckedIconCircle';
 import React from 'react';
 import { TrainerCertificate } from 'shared/types';
-import { CertContainer, CertificateData, CertificateContainer, CertificateName, CertificateNumberText, IconContainer, OtherCertificate, ImageOther } from './ClientCertificateStyles';
-
+import {
+  CertContainer,
+  CertificateData,
+  CertificateContainer,
+  CertificateName,
+  CertificateNumberText,
+  IconContainer,
+  OtherCertificate,
+  ImageOther,
+} from './ClientCertificateStyles';
 
 type Props = {
   certificate: TrainerCertificate;
@@ -20,7 +28,7 @@ export const CertificateItemProf: React.FC<Props> = ({
           <CertificateNumberText>ID: {certificateNumber}</CertificateNumberText>
         </CertificateContainer>
         <IconContainer>
-            <CheckedIconCircle />
+          <CheckedIconCircle />
         </IconContainer>
       </CertificateData>
 
@@ -32,8 +40,5 @@ export const CertificateItemProf: React.FC<Props> = ({
     </CertContainer>
   );
 };
-
-
-
 
 export default CertificateItemProf;
