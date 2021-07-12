@@ -18,6 +18,9 @@ const GlobalStyle = createGlobalStyle`
     .displayMdUp{
       display: none;
     }
+    .hidden{
+      display: none;
+    }
   }
 
   @media screen and (min-width: 600px){
@@ -27,9 +30,12 @@ const GlobalStyle = createGlobalStyle`
     .displayMdUp{
       display: block;
     }
+    .hidden{
+      display: none;
+    }
   }
 `;
-
+const space = ['8px', '16px', '24px', '32px', '40px', '64px', '48px'];
 const theme = {
   colors: {
     primary: '#4C33C3',
@@ -43,6 +49,15 @@ const theme = {
     normal: 1024,
     large: 1280,
     xlarge: 1920,
+  },
+  space: {
+    all: space,
+    xsmall: space[0],
+    small: space[1],
+    medium: space[2],
+    large: space[3],
+    xlarge: space[4],
+    xxlarge: space[5],
   },
 };
 

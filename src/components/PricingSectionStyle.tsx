@@ -4,15 +4,6 @@ export const PriceHeader = styled.div`
   margin-top: 8px;
 `;
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  @media (max-width: 600px) {
-    padding: 8px;
-  }
-`;
-
 export const ButtonItemBox = styled.div`
   display: flex;
   align-items: center;

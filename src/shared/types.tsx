@@ -62,9 +62,52 @@ export type TrainerCertificate = {
   websiteUrl?: string;
 };
 
-
 export type CartItem = {
   label: string;
   isSubscription: boolean;
   price: number;
+};
+
+export type Image = {
+  url: string;
+};
+export type Trainer = {
+  id: number;
+  firstname: string;
+  lastname: string;
+};
+export type ClassInfo = {
+  name: string;
+  image: Image;
+  trainer: Trainer;
+  durationInMinutes: number;
+  instructionTypeId: number;
+  description: string;
+  equipmentIds: number[];
+  availability: string;
+  level: string;
+};
+
+export enum ClassLevel {
+  Beginner = 'Beginner',
+  Intermediate = 'Intermediate',
+  Expert = 'Advanced',
+  AllLevels = 'AllLevels',
 }
+
+export const ClassLevelLabels = {
+  [ClassLevel.Beginner]: 'Beginner',
+  [ClassLevel.Intermediate]: 'Intermediate',
+  [ClassLevel.Expert]: 'Advanced',
+  [ClassLevel.AllLevels]: 'All Levels',
+};
+
+export enum ClassAvailability {
+  Open = 'Open',
+  InviteOnly = 'InviteOnly',
+}
+
+export const ClassAvailabilityLabels = {
+  [ClassAvailability.Open]: 'Open to Everyone',
+  [ClassAvailability.InviteOnly]: 'Invite only',
+};

@@ -10,6 +10,7 @@ import {
   IconContainer,
   OtherCertificate,
   ImageOther,
+  Image,
 } from './ClientCertificateStyles';
 
 type Props = {

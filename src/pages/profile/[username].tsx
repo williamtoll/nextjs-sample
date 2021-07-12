@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import styled from 'styled-components';
 import ProfileHeader from '../../components/ProfileHeader';
 import TitledTrainerSection from '../../components/TitledTrainerSection';
 import { ImageType, TrainerCertificate } from 'shared/types';
-import CenteredCss from '../../styles/CenteredCss';
 import JoinedData from '../../components/JoinedData';
 import { SocialMediaItem } from '../../components/SocialMediaItem';
 import PricingSection from '../../components/PricingSection';
@@ -16,6 +14,21 @@ import * as CertificateUtils from '../../utils/certificate';
 import { JijoIcon } from 'images/JijoIcon';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import {
+  ImageContainer,
+  IconWrapper,
+  TrainerInfoWrapper,
+  CenteredContent,
+  ColumnsWrapper,
+  BigColumn,
+  TrainerDetailsWrap,
+  BasicInfoContainer,
+  BaseInfoWrapper,
+  BioText,
+  Column,
+  Subtitle,
+} from 'styles/TrainerProfileStyles';
+import { HeaderWrapper, StyledContainer } from 'styles/GlobalStyles';
 
 type Props = {
   name: string;
@@ -162,11 +175,13 @@ const TrainerProfile: React.FC<Props> = ({
                   <Subtitle>Pricing</Subtitle>
                   <PricingSection />
                   <Subtitle>Next Classes</Subtitle>
-                  <ClassDetailsBookBox
-                    BookClass={null}
-                    nextSessions={bookingSlots}
-                    onDetailsClick={null}
-                  />
+                  {bookingSlots && (
+                    <ClassDetailsBookBox
+                      BookClass={null}
+                      nextSessions={bookingSlots}
+                      onDetailsClick={null}
+                    />
+                  )}
                 </Column>
               </div>
             </ColumnsWrapper>
@@ -191,6 +206,7 @@ const TrainerProfile: React.FC<Props> = ({
             </div>
           </CenteredContent>
         </TrainerInfoWrapper>
+      
       </StyledContainer>
     </>
   );
@@ -208,7 +224,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       headers: {
         'Content-Type': 'application/json',
         Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3OTZiYzJmYy1iZDZjLTQ1YzMtOWU1Yy1mYjFiNGZjZjYzNjYiLCJuYW1laWQiOiI4OSIsImVtYWlsIjoid3RvbGVkbytjbGllbnRlMTFAbXlqaWpvLmNvbSIsImdpdmVuX25hbWUiOiJ3dG9sZWRvIGNsaWVudCIsImZhbWlseV9uYW1lIjoidG9sbCIsImlzSW5zdGFudENsYXNzRmVhdHVyZUVuYWJsZWQiOiJGYWxzZSIsImF1dGhtZXRob2QiOiJwYXNzd29yZCIsInJvbGUiOiJDbGllbnQiLCJuYmYiOjE2MjU1NzM1OTksImV4cCI6MTYyNjAwNTU5OSwiaWF0IjoxNjI1NTczNTk5LCJpc3MiOiJTZWN1cmVBcGkiLCJhdWQiOiJTZWN1cmVBcGlVc2VyIn0.c-f7M154irI9OGHpkLI2-qk4oKwH1Bw_m_cWNSKsvJ4',
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwNGNkYWE1ZC04NWNkLTQ2OWUtOGYxOS1kNjMzNDg2YTkwZTEiLCJuYW1laWQiOiI4OSIsImVtYWlsIjoid3RvbGVkbytjbGllbnRlMTFAbXlqaWpvLmNvbSIsImdpdmVuX25hbWUiOiJ3dG9sZWRvIGNsaWVudCIsImZhbWlseV9uYW1lIjoidG9sbCIsImlzSW5zdGFudENsYXNzRmVhdHVyZUVuYWJsZWQiOiJGYWxzZSIsImF1dGhtZXRob2QiOiJwYXNzd29yZCIsInJvbGUiOiJDbGllbnQiLCJuYmYiOjE2MjYwOTQ4NTQsImV4cCI6MTYyNjUyNjg1NCwiaWF0IjoxNjI2MDk0ODU0LCJpc3MiOiJTZWN1cmVBcGkiLCJhdWQiOiJTZWN1cmVBcGlVc2VyIn0.QyAMgicDWVi2LP8Y0dP2-HayQhqyRKSXIOhwHbgk87Q',
       },
     },
   );
@@ -304,127 +320,5 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
   };
 };
-
-const StyledContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.white};
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
-
-const HeaderWrapper = styled.header`
-  padding: 24px;
-  width: 100%;
-  display: flex;
-  ${CenteredCss}
-`;
-
-const IconWrapper = styled.a`
-  transition: opacity 0.5s ease-in-out;
-  :hover {
-    opacity: 0.8;
-    cursor: pointer;
-  }
-`;
-
-const TrainerInfoWrapper = styled.div`
-  ${CenteredCss};
-  padding-top: 40px;
-`;
-
-const CenteredContent = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  padding-bottom: 20px;
-`;
-
-const ColumnsWrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  @media (min-width: 600px) {
-    flex-direction: row;
-  }
-`;
-
-const BigColumn = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  margin-right: 24px;
-`;
-
-const Column = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding-top: 39px;
-`;
-
-const TrainerDetailsWrap = styled.div`
-  margin-right: 0;
-  @media (max-width: 599px) {
-    margin-right: 24px;
-  }
-`;
-
-const BaseInfoWrapper = styled.div`
-  width: 100%;
-  padding-bottom: 24px;
-  margin-top: 32px;
-  display: flex;
-  gap: 10px;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-self: flex-start;
-  position: relative;
-  @media (max-width: 599px) {
-    padding-bottom: 32px;
-  }
-  @media (max-width: 960px) {
-    margin-top: 0px;
-  }
-`;
-
-const BioText = styled.span`
-  font-family: Mukta;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 140%;
-  color: #000;
-  line-height: 25.6px;
-  padding-bottom: 16px;
-  text-align: justify;
-`;
-
-const ImageContainer = styled.div`
-  max-width: 276px;
-  border-radius: 8px;
-  overflow: hidden;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  @media (max-width: 550px) {
-    max-width: 200px;
-  }
-`;
-
-const BasicInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Subtitle = styled.div`
-  font-size: 24px;
-  margin: 15px 0px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.primary};
-`;
 
 export default TrainerProfile;

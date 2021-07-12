@@ -4,3 +4,5 @@ export const GLOBAL_MEDIA_QUERIES = {
   large: '(min-width: 1200px)',
   mdUp: '(min-width: 600px)',
 };
+
+export const API_URL = 'https://dev-api.myjijo.com/api/v1';

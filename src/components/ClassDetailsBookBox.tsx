@@ -24,6 +24,8 @@ import {
   TypeButtons,
   ViewDetails,
 } from './ClassDetailStyles';
+import { Container } from 'styles/GlobalStyles';
+import { StyledBox } from 'styles/ClassesStyles';
 
 type Props = {
   nextSessions: CalendarEvent[];
@@ -54,16 +56,18 @@ export const ClassDetailsBookBox: React.FC<Props> = ({
 
   return (
     <>
-      <Pagination
-        pageSize={pageSize}
-        setPageSize={setPageSize}
-        pageIndex={pageIndex}
-        maxPages={maxPages}
-        previousPage={previousPage}
-        canPreviousPage={canPreviousPage}
-        nextPage={nextPage}
-        canNextPage={canNextPage}
-      />
+      <StyledBox className="hidden">
+        <Pagination
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+          pageIndex={pageIndex}
+          maxPages={maxPages}
+          previousPage={previousPage}
+          canPreviousPage={canPreviousPage}
+          nextPage={nextPage}
+          canNextPage={canNextPage}
+        />
+      </StyledBox>
 
       {view.map((event, i, array) => {
         const TrainingTypeIcon =
@@ -85,69 +89,71 @@ export const ClassDetailsBookBox: React.FC<Props> = ({
 
         return (
           <>
-            <MainContainer isFirst={i === 0 ? true : false}>
-              {today && i === 0 ? (
-                <TitleEvent>Today</TitleEvent>
-              ) : (
-                <>
-                  {(!sameDayBefore || i === 0) && (
-                    <TitleEvent>
-                      {DateUtils.formatCompleteNameAndDateTz(
-                        event.startTime,
-                        timeZone,
-                      )}
-                    </TitleEvent>
-                  )}
-                </>
-              )}
+            <Container>
+              <MainContainer isFirst={i === 0 ? true : false}>
+                {today && i === 0 ? (
+                  <TitleEvent>Today</TitleEvent>
+                ) : (
+                  <>
+                    {(!sameDayBefore || i === 0) && (
+                      <TitleEvent>
+                        {DateUtils.formatCompleteNameAndDateTz(
+                          event.startTime,
+                          timeZone,
+                        )}
+                      </TitleEvent>
+                    )}
+                  </>
+                )}
 
-              <BoxPurple>
-                <div>
-                  <LinkBox onClick={null}>{event?.name}</LinkBox>
-                  <TimeZoneBox>
-                    <DateTitle>
-                      {DateUtils.formatDatePeriodWithTimeZone(
-                        event.startTime,
-                        event.endTime,
-                        timeZone,
-                      )}
-                    </DateTitle>
-                  </TimeZoneBox>
-                  <Participant>
-                    {event.numberOfParticipants} Participants
-                    <ViewDetails onClick={() => onDetailsClick(null)}>
-                      Click to View Details
-                    </ViewDetails>
-                  </Participant>
-
-                  <FooterButtons>
-                    <TypeButtons>
-                      <TrainingTypeIcon />
-                      {event?.instructionType === InstructionType.Group ? (
-                        <GroupTitle>GROUP</GroupTitle>
-                      ) : (
-                        <GroupTitle>PRIVATE</GroupTitle>
-                      )}
-                    </TypeButtons>
-                    <OpenButtons>
-                      <GroupTitle>OPEN TO EVERYONE</GroupTitle>
-                    </OpenButtons>
-                  </FooterButtons>
-                </div>
-
-                <BoxContainer>
+                <BoxPurple>
                   <div>
-                    <BookedButtons>
-                      <>
-                        <BlueButton onClick={() => BookClass(null)}>
-                          Book
-                        </BlueButton>
-                      </>
-                    </BookedButtons>
+                    <LinkBox onClick={null}>{event?.name}</LinkBox>
+                    <TimeZoneBox>
+                      <DateTitle>
+                        {DateUtils.formatDatePeriodWithTimeZone(
+                          event.startTime,
+                          event.endTime,
+                          timeZone,
+                        )}
+                      </DateTitle>
+                    </TimeZoneBox>
+                    <Participant>
+                      {event.numberOfParticipants} Participants
+                      <ViewDetails onClick={() => onDetailsClick(null)}>
+                        Click to View Details
+                      </ViewDetails>
+                    </Participant>
+
+                    <FooterButtons>
+                      <TypeButtons>
+                        <TrainingTypeIcon />
+                        {event?.instructionType === InstructionType.Group ? (
+                          <GroupTitle>GROUP</GroupTitle>
+                        ) : (
+                          <GroupTitle>PRIVATE</GroupTitle>
+                        )}
+                      </TypeButtons>
+                      <OpenButtons>
+                        <GroupTitle>OPEN TO EVERYONE</GroupTitle>
+                      </OpenButtons>
+                    </FooterButtons>
                   </div>
-                </BoxContainer>
-              </BoxPurple>
-            </MainContainer>
+
+                  <BoxContainer>
+                    <div>
+                      <BookedButtons>
+                        <>
+                          <BlueButton onClick={() => BookClass(null)}>
+                            Book
+                          </BlueButton>
+                        </>
+                      </BookedButtons>
+                    </div>
+                  </BoxContainer>
+                </BoxPurple>
+              </MainContainer>
+            </Container>
           </>
         );
       })}
