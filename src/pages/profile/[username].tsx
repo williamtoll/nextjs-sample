@@ -4,14 +4,14 @@ import { GetServerSideProps } from 'next';
 import styled from 'styled-components';
 import ProfileHeader from '../../components/ProfileHeader';
 import TitledTrainerSection from '../../components/TitledTrainerSection';
-import { CalendarEvent, ImageType, TrainerCertificate } from 'shared/types';
+import { ImageType, TrainerCertificate } from 'shared/types';
 import CenteredCss from '../../styles/CenteredCss';
 import JoinedData from '../../components/JoinedData';
 import { SocialMediaItem } from '../../components/SocialMediaItem';
 import PricingSection from '../../components/PricingSection';
 import TrainerProfileMobile from '../../fragments/TrainerProfileMobile';
 import { ClassDetailsBookBox } from '../../components/ClassDetailsBookBox';
-import { CertificateItemProf } from '../../components/ClientCertificateProf';
+import { CertificateItemProf } from '../../components/ClientCertificate';
 import * as CertificateUtils from '../../utils/certificate';
 import { JijoIcon } from 'images/JijoIcon';
 import { useEffect } from 'react';
@@ -67,8 +67,6 @@ const TrainerProfile: React.FC<Props> = ({
       setBookingSlots(nextSessions.result);
     }
   }, [nextSessions]);
-
-  useEffect(() => {}, [bookingSlots]);
 
   return (
     <>
@@ -163,12 +161,12 @@ const TrainerProfile: React.FC<Props> = ({
                 <Column>
                   <Subtitle>Pricing</Subtitle>
                   <PricingSection />
-                  {/* <Subtitle>Next Classes</Subtitle>
-                   <ClassDetailsBookBox
-                      BookClass={null}
-                      nextSessions={bookingSlots}
-                      onDetailsClick={null}
-                    /> */}
+                  <Subtitle>Next Classes</Subtitle>
+                  <ClassDetailsBookBox
+                    BookClass={null}
+                    nextSessions={bookingSlots}
+                    onDetailsClick={null}
+                  />
                 </Column>
               </div>
             </ColumnsWrapper>
