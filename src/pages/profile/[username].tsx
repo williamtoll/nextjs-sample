@@ -189,7 +189,6 @@ const TrainerProfile: React.FC<Props> = ({
               <ColumnsWrapper>
                 <Column>
                   <TrainerProfileMobile
-                    pricings={pricings}
                     instagram={instagram}
                     facebook={facebook}
                     linkedIn={linkedIn}
@@ -206,7 +205,6 @@ const TrainerProfile: React.FC<Props> = ({
             </div>
           </CenteredContent>
         </TrainerInfoWrapper>
-      
       </StyledContainer>
     </>
   );

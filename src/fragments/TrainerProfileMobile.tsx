@@ -41,6 +41,7 @@ const TrainerProfile: React.FC<Props> = ({
   classType,
   personality,
 }) => {
+  
   const openTab = useCallback((evt, tabName) => {
     let i;
     const tabContent = document.getElementsByClassName('tabcontent');
