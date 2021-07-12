@@ -1,6 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
-import { List, ListItem, EquipmentImage, EquipmentName } from './EquipmentStyles';
+import {
+  List,
+  ListItem,
+  EquipmentImage,
+  EquipmentName,
+} from './EquipmentStyles';
 import { LabelText } from './LabeledInfoStyles';
 
 type Props = {
